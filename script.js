@@ -7,7 +7,17 @@ let isPaused = false;
 let enteredTime = null;
 
 function startTimer() {
-    timer = setInterval(updateTimer, 1000);
+
+    const pauseResumeButton = document.querySelector('.control-buttons button');
+
+    if(! timer) {
+        timer = setInterval(updateTimer, 1000);
+        // isPaused = ! isPaused;
+    }
+    else if(timer && isPaused) {
+        clearInterval(timer);
+        pauseResumeButton.textContent = 'Pause';
+    }       
 }
 
 function updateTimer() {
