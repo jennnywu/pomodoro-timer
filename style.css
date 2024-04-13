@@ -3,8 +3,8 @@
 body {
     display: flex;
     align-items: center;
-    justify-content: cener;
-    font-family: sans-serif;
+    justify-content: center;
+    font-family: 'Montserrat';
     line-height: 1.5;
     min-height: 100vh;
     background: #f3f3f3;
@@ -15,7 +15,6 @@ body {
 .main {
     background-color: #fff;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 10px 20px;
     transition: transform 0.2s;
     width: 500px;
@@ -23,17 +22,17 @@ body {
     text-align: center;
 }
 
-.timer-circle {
-    border-radius: 50%;
+.timer-border {
+   /* border-radius: 50%; */
     width: 200px;
     height: 200px;
     margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
-    color: crimson;
-    border: 8px solid #3498db;
+    font-size: 100px;
+    color: darkslategray;
+    /* border: 8px solid #3498db; */
 }
 
 .control-buttons button {

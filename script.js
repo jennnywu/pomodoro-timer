@@ -8,10 +8,10 @@ let enteredTime = null;
 
 function startTimer() {
     const pauseResumeButton = document.querySelector('.control-buttons button');
-    timer = setInterval(updateTimer, 1000);
 
     if(minutes == enteredTime || 15) {
         pauseResumeButton.textContent = 'Start';
+        timer = setInterval(updateTimer, 1000);
     }
 }
 
@@ -22,7 +22,10 @@ function updateTimer() {
     if(minutes == 0 && seconds == 0) {
         clearInterval(timer);
         alert('Time is up! Take a break :)');
-    } else if(! isRunning) {
+    }
+    if(isRunning) {
+        clearInterval(timer);
+    } else {
         if(seconds > 0) {
             seconds--;
         } else {
@@ -68,13 +71,13 @@ function chooseTime() {
 
 startTimer();
 const pauseResumeButton = document.querySelector('.control-buttons button');
-pauseResumeButton.addEventListener('click', e => {
-    if(isRunning) {
-        clearInterval(timer);
-        pauseResumeButton.textContent = 'Pause';
-    }
-    else {
-        pauseResumeButton.textContent = 'Resume';
-    }
-    isRunning = ! isRunning;
-})
+    pauseResumeButton.addEventListener('click', e => {
+        if(isRunning) {
+            clearInterval(timer);
+            pauseResumeButton.textContent = 'Pause';
+        }
+        else {
+            pauseResumeButton.textContent = 'Resume';
+        }
+        isRunning = ! isRunning;
+    })
