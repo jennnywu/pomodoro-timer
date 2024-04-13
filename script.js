@@ -3,7 +3,7 @@
 let timer;
 let minutes = 15;
 let seconds = 0;
-let isPaused = true;
+let isRunning = true;
 let enteredTime = null;
 
 function startTimer() {
@@ -13,17 +13,6 @@ function startTimer() {
     if(minutes == enteredTime || 15) {
         pauseResumeButton.textContent = 'Start';
     }
-    
-    pauseResumeButton.addEventListener('click', e => {
-        if(isPaused) {
-            clearInterval(timer);
-            pauseResumeButton.textContent = 'Pause';
-        }
-        else {
-            pauseResumeButton.textContent = 'Resume';
-        }
-        isPaused = ! isPaused;
-    })
 }
 
 function updateTimer() {
@@ -33,7 +22,7 @@ function updateTimer() {
     if(minutes == 0 && seconds == 0) {
         clearInterval(timer);
         alert('Time is up! Take a break :)');
-    } else if(! isPaused) {
+    } else if(! isRunning) {
         if(seconds > 0) {
             seconds--;
         } else {
@@ -51,7 +40,7 @@ function restartTimer() {
     clearInterval(timer);
     minutes = enteredTime || 15;
     seconds = 0;
-    isPaused = true;
+    isRunning = true;
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
     const pauseResumeButton = document.querySelector('.control-buttons button');
@@ -65,7 +54,7 @@ function chooseTime() {
         enteredTime = parseInt(newTime);
         minutes = enteredTime;
         seconds = 0;
-        isPaused = true;
+        isRunning = true;
         const timerElement = document.getElementById('timer');
         timerElement.textContent = formatTime(minutes, seconds);
         clearInterval(timer);
@@ -77,4 +66,15 @@ function chooseTime() {
     }
 }
 
-// startTimer();
+startTimer();
+const pauseResumeButton = document.querySelector('.control-buttons button');
+pauseResumeButton.addEventListener('click', e => {
+    if(isRunning) {
+        clearInterval(timer);
+        pauseResumeButton.textContent = 'Pause';
+    }
+    else {
+        pauseResumeButton.textContent = 'Resume';
+    }
+    isRunning = ! isRunning;
+})
