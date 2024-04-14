@@ -9,10 +9,27 @@ let enteredTime = null;
 function startTimer() {
     const pauseResumeButton = document.querySelector('.control-buttons button');
 
-    if(minutes == enteredTime || 15) {
-        pauseResumeButton.textContent = 'Start';
+    //if(isRunning) {
+    if(minutes == enteredTime || 5 || 10 || 15) {
+        pauseResumeButton.textContent = 'start';
         timer = setInterval(updateTimer, 1000);
+        //isRunning = ! isRunning;
     }
+}
+
+function pomodoro() {
+    enteredTime = 15;
+    startTimer();
+}
+
+function shortBreak() {
+    enteredTime = 5;
+    restartTimer();
+}
+
+function longBreak() {
+    enteredTime = 10;
+    restartTimer();
 }
 
 function updateTimer() {
@@ -41,13 +58,13 @@ function formatTime(minutes, seconds) {
 
 function restartTimer() {
     clearInterval(timer);
-    minutes = enteredTime || 15;
+    minutes = enteredTime || 5 || 10 || 15;
     seconds = 0;
     isRunning = true;
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
     const pauseResumeButton = document.querySelector('.control-buttons button');
-    pauseResumeButton.textContent = 'Start';
+    pauseResumeButton.textContent = 'start';
     startTimer();
 }
 
@@ -62,22 +79,22 @@ function chooseTime() {
         timerElement.textContent = formatTime(minutes, seconds);
         clearInterval(timer);
         const pauseResumeButton = document.querySelector('.control-buttons button');
-        pauseResumeButton.textContent = 'Start';
+        pauseResumeButton.textContent = 'start';
         startTimer();
     } else {
-        alert('Invalid input. Please enter' + ' a valid number greater than 0');
+        alert('Please enter a valid number greater than 0');
     }
 }
 
-startTimer();
 const pauseResumeButton = document.querySelector('.control-buttons button');
-    pauseResumeButton.addEventListener('click', e => {
-        if(isRunning) {
-            clearInterval(timer);
-            pauseResumeButton.textContent = 'Pause';
-        }
-        else {
-            pauseResumeButton.textContent = 'Resume';
-        }
-        isRunning = ! isRunning;
-    })
+pauseResumeButton.addEventListener('click', e => {
+    if(isRunning) {
+        clearInterval(timer);
+        pauseResumeButton.textContent = 'pause';
+    }
+    else {
+        pauseResumeButton.textContent = 'resume';
+    }
+    isRunning = ! isRunning;
+})
+if(isRunning) startTimer();
