@@ -12,7 +12,6 @@ function startTimer() {
     if(minutes == enteredTime || 15) {
         pauseResumeButton.textContent = 'start';
         timer = setInterval(updateTimer, 1000);
-        //isRunning = ! isRunning;
     }
 }
 
@@ -35,10 +34,6 @@ function updateTimer() {
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
 
-    if(minutes == 0 && seconds == 0) {
-        clearInterval(timer);
-        alert('Time is up! Take a break :)');
-    }
     if(isRunning) {
         clearInterval(timer);
     } else {
@@ -48,6 +43,11 @@ function updateTimer() {
             seconds = 59;
             minutes--;
         }
+    }
+
+    if(minutes == 0 && seconds == 0) {
+        clearInterval(timer);
+        alert('Time is up! Take a break :)');
     }
 }
 
@@ -97,4 +97,3 @@ pauseResumeButton.addEventListener('click', e => {
 })
 
 startTimer();
-// window.addEventListener('load', startTimer);
