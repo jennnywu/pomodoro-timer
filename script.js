@@ -9,8 +9,7 @@ let enteredTime = null;
 function startTimer() {
     const pauseResumeButton = document.querySelector('.control-buttons button');
 
-    //if(isRunning) {
-    if(minutes == enteredTime || 5 || 10 || 15) {
+    if(minutes == enteredTime || 15) {
         pauseResumeButton.textContent = 'start';
         timer = setInterval(updateTimer, 1000);
         //isRunning = ! isRunning;
@@ -19,7 +18,7 @@ function startTimer() {
 
 function pomodoro() {
     enteredTime = 15;
-    startTimer();
+    restartTimer();
 }
 
 function shortBreak() {
@@ -58,7 +57,7 @@ function formatTime(minutes, seconds) {
 
 function restartTimer() {
     clearInterval(timer);
-    minutes = enteredTime || 5 || 10 || 15;
+    minutes = enteredTime || 15;
     seconds = 0;
     isRunning = true;
     const timerElement = document.getElementById('timer');
@@ -91,10 +90,11 @@ pauseResumeButton.addEventListener('click', e => {
     if(isRunning) {
         clearInterval(timer);
         pauseResumeButton.textContent = 'pause';
-    }
-    else {
+    } else {
         pauseResumeButton.textContent = 'resume';
     }
     isRunning = ! isRunning;
 })
-if(isRunning) startTimer();
+
+startTimer();
+// window.addEventListener('load', startTimer);
