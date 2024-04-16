@@ -1,7 +1,7 @@
 // script.js
 
 let timer;
-let minutes = 15;
+let minutes = 25;
 let seconds = 0;
 let isRunning = true;
 let enteredTime = null;
@@ -9,14 +9,15 @@ let enteredTime = null;
 function startTimer() {
     const pauseResumeButton = document.querySelector('.control-buttons button');
 
-    if(minutes == enteredTime || 15) {
+    //if(minutes == enteredTime || 15 && button.textContent == 'start') {
+    if(minutes == enteredTime || 25) {
         pauseResumeButton.textContent = 'start';
         timer = setInterval(updateTimer, 1000);
     }
 }
 
 function pomodoro() {
-    enteredTime = 15;
+    enteredTime = 25;
     restartTimer();
 }
 
@@ -57,7 +58,7 @@ function formatTime(minutes, seconds) {
 
 function restartTimer() {
     clearInterval(timer);
-    minutes = enteredTime || 15;
+    minutes = enteredTime || 25;
     seconds = 0;
     isRunning = true;
     const timerElement = document.getElementById('timer');
