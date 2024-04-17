@@ -27,7 +27,7 @@ function shortBreak() {
 }
 
 function longBreak() {
-    enteredTime = 10;
+    enteredTime = 15;
     restartTimer();
 }
 
