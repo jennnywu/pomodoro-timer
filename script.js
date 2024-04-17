@@ -96,5 +96,5 @@ pauseResumeButton.addEventListener('click', e => {
     }
     isRunning = ! isRunning;
 })
-
+restartTimer();
 startTimer();
