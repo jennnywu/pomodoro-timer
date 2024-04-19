@@ -9,8 +9,8 @@ let enteredTime = null;
 function startTimer() {
     const pauseResumeButton = document.querySelector('.control-buttons button');
 
-    //if(minutes == enteredTime || 15 && button.textContent == 'start') {
-    if(minutes == enteredTime || 25) {
+    if(enteredTime === 25 || enteredTime === 5 || enteredTime || 15) {
+    //if(minutes == enteredTime || 25) {
         pauseResumeButton.textContent = 'start';
         timer = setInterval(updateTimer, 1000);
     }
