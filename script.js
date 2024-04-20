@@ -29,6 +29,7 @@ shortBreakButton.addEventListener('click', () => selectedTimer('shortBreak-butto
 longBreakButton.addEventListener('click', () => selectedTimer('longBreak-button'));
 
 if(statusState == buttonState.START) {
+    startButton.classList.add('selected');
     pomodoroButton.classList.add('selected');
 }
 
@@ -93,10 +94,12 @@ startButton.addEventListener('click', function() {
         startButton.textContent = 'pause';
     } else if(statusState == buttonState.RUNNING) {
         setButtonState(buttonState.PAUSED);
+        startButton.classList.remove('selected');
         clearInterval(timer);
         startButton.textContent = 'resume';
     } else {
         setButtonState(buttonState.RUNNING);
+        startButton.classList.remove('selected');
         timer = setInterval(updateTimer, 1000);
         startButton.textContent = 'pause';
     }
