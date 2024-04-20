@@ -3,25 +3,56 @@
 let timer;
 let minutes = 25;
 let seconds = 0;
+let enteredTime = null;
+
 const buttonState = Object.freeze ({
     START: 1,
     RUNNING: 2,
     PAUSED: 3
 });
-let state = buttonState.START;
-let enteredTime = null;
+let statusState = buttonState.START;
+
+const timerState = Object.freeze ({
+    POMODORO: 1,
+    SHORTBREAK: 2,
+    LONGBREAK: 3
+});
+let timerType = timerState.POMODORO;
+
 const startButton = document.getElementById('start-button');
+const pomodoroButton = document.getElementById('pomodoro-button');
+const shortBreakButton = document.getElementById('shortBreak-button');
+const longBreakButton = document.getElementById('longBreak-button');
+
+pomodoroButton.addEventListener('click', () => selectedTimer('pomodoro-button'));
+shortBreakButton.addEventListener('click', () => selectedTimer('shortBreak-button'));
+longBreakButton.addEventListener('click', () => selectedTimer('longBreak-button'));
+
+if(statusState == buttonState.START) {
+    pomodoroButton.classList.add('selected');
+}
+
+function selectedTimer(buttonId) {
+    const buttons = [pomodoroButton, shortBreakButton, longBreakButton];
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        document.getElementById(buttonId).classList.add('selected');
+}
+
+function setTimerState(newState) {
+    console.log('timer state changed from ' + timerType + ' to ' + newState);
+    timerType = newState;
+}
 
 function setButtonState(newState) {
-    console.log('state changed from ' + state + ' to ' + newState);
-    state = newState;
+    console.log('button state changed from ' + statusState + ' to ' + newState);
+    statusState = newState;
 }
 
 function updateTimer() {
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
 
-    if(state == buttonState.PAUSED || state == buttonState.START) {
+    if(statusState == buttonState.PAUSED || statusState == buttonState.START) {
         console.log('this should not happen');
         clearInterval(timer);
     } else {
@@ -54,14 +85,13 @@ function restartTimer() {
 }
 
 startButton.addEventListener('click', function() {
-    console.log('start/pause/resume button clicked');
-    console.log(state);
+    console.log('button state is ' + statusState);
 
-    if(state == buttonState.START) {
+    if(statusState == buttonState.START) {
         setButtonState(buttonState.RUNNING);
         timer = setInterval(updateTimer, 1000);
         startButton.textContent = 'pause';
-    } else if(state == buttonState.RUNNING) {
+    } else if(statusState == buttonState.RUNNING) {
         setButtonState(buttonState.PAUSED);
         clearInterval(timer);
         startButton.textContent = 'resume';
@@ -91,16 +121,19 @@ document.getElementById('chooseTime-button').addEventListener("click", function(
 });
 
 document.getElementById('pomodoro-button').addEventListener('click', function() {
+    setTimerState(timerState.POMODORO);
     enteredTime = 25;
     restartTimer();
 });
 
 document.getElementById('shortBreak-button').addEventListener('click', function() {
+    setTimerState(timerState.SHORTBREAK);
     enteredTime = 5;
     restartTimer();
 });
 
 document.getElementById('longBreak-button').addEventListener('click', function() {
+    setTimerState(timerState.LONGBREAK);
     enteredTime = 15;
     restartTimer();
 });
