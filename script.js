@@ -29,7 +29,7 @@ shortBreakButton.addEventListener('click', () => selectedTimer('shortBreak-butto
 longBreakButton.addEventListener('click', () => selectedTimer('longBreak-button'));
 
 if(statusState == buttonState.START) {
-    startButton.classList.add('selected');
+    // startButton.classList.add('selected');
     pomodoroButton.classList.add('selected');
 }
 

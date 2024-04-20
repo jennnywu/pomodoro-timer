@@ -1,5 +1,9 @@
 /* style.css */
 
+:root {
+    --main-color: rgb(169, 58, 64);
+}
+
 body {
     display: flex;
     align-items: center;
@@ -8,7 +12,8 @@ body {
     font-weight: bold;
     line-height: 1.5;
     min-height: 100vh;
-    background: rgb(225, 193, 243);
+    background-image: url('wallpaper6.jpg');
+    background-size: cover;
     flex-direction: column;
     margin: 0;
 }
@@ -31,8 +36,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 100px;
-    color: rgb(56, 14, 56);
+    font-size: 130px;
+    color: white;
 }
 
 .control-buttons {
@@ -45,23 +50,28 @@ body {
 .control-buttons button {
     font-family: 'Montserrat';
     font-size: 16px;
-    color: rgb(56, 14, 56);
+    font-weight: bold;
+    color: white;
     background-color: transparent;
-    border: 3px solid rgb(56, 14, 56);
+    border: 3px solid white;
     padding: 5px 40px;
     border-radius: 50px;
     cursor: pointer;
+    position: relative;
 }
 
 .control-buttons button:hover {
-    color: rgb(56, 14, 56);
+    font-weight: bold;
+    color: var(--main-color);
     background-color: white;
     transition: color 0.3s;
-    transition: background-color 0.3s;
+    transition: background-color 0.5s;
+    z-index: 0;
 }
 
 .control-buttons button.selected {
-    color: rgb(56, 14, 56);
+    font-weight: bold;
+    color: var(--main-color);
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.3s;
