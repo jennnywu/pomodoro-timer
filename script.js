@@ -3,39 +3,26 @@
 let timer;
 let minutes = 25;
 let seconds = 0;
-let isRunning = true;
+const buttonState = Object.freeze ({
+    START: 1,
+    RUNNING: 2,
+    PAUSED: 3
+});
+let state = buttonState.START;
 let enteredTime = null;
+const startButton = document.getElementById('start-button');
 
-function startTimer() {
-    const pauseResumeButton = document.querySelector('.control-buttons button');
-
-    if(enteredTime === 25 || enteredTime === 5 || enteredTime || 15) {
-    //if(minutes == enteredTime || 25) {
-        pauseResumeButton.textContent = 'start';
-        timer = setInterval(updateTimer, 1000);
-    }
-}
-
-function pomodoro() {
-    enteredTime = 25;
-    restartTimer();
-}
-
-function shortBreak() {
-    enteredTime = 5;
-    restartTimer();
-}
-
-function longBreak() {
-    enteredTime = 15;
-    restartTimer();
+function setButtonState(newState) {
+    console.log('state changed from ' + state + ' to ' + newState);
+    state = newState;
 }
 
 function updateTimer() {
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
 
-    if(isRunning) {
+    if(state == buttonState.PAUSED || state == buttonState.START) {
+        console.log('this should not happen');
         clearInterval(timer);
     } else {
         if(seconds > 0) {
@@ -57,44 +44,63 @@ function formatTime(minutes, seconds) {
 }
 
 function restartTimer() {
+    setButtonState(buttonState.START);
     clearInterval(timer);
     minutes = enteredTime || 25;
     seconds = 0;
-    isRunning = true;
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
-    const pauseResumeButton = document.querySelector('.control-buttons button');
-    pauseResumeButton.textContent = 'start';
-    startTimer();
+    startButton.textContent = 'start';
 }
 
-function chooseTime() {
+startButton.addEventListener('click', function() {
+    console.log('start/pause/resume button clicked');
+    console.log(state);
+
+    if(state == buttonState.START) {
+        setButtonState(buttonState.RUNNING);
+        timer = setInterval(updateTimer, 1000);
+        startButton.textContent = 'pause';
+    } else if(state == buttonState.RUNNING) {
+        setButtonState(buttonState.PAUSED);
+        clearInterval(timer);
+        startButton.textContent = 'resume';
+    } else {
+        setButtonState(buttonState.RUNNING);
+        timer = setInterval(updateTimer, 1000);
+        startButton.textContent = 'pause';
+    }
+});
+
+document.getElementById('restart-button').addEventListener("click", restartTimer);
+
+document.getElementById('chooseTime-button').addEventListener("click", function() {
     const newTime = prompt('Enter new time in minutes: ');
     if(! isNaN(newTime) && newTime > 0) {
+        clearInterval(timer);
         enteredTime = parseInt(newTime);
         minutes = enteredTime;
         seconds = 0;
-        isRunning = true;
+        restartTimer();
         const timerElement = document.getElementById('timer');
         timerElement.textContent = formatTime(minutes, seconds);
-        clearInterval(timer);
-        const pauseResumeButton = document.querySelector('.control-buttons button');
-        pauseResumeButton.textContent = 'start';
-        startTimer();
+        startButton.textContent = 'start';
     } else {
         alert('Please enter a valid number greater than 0');
     }
-}
+});
 
-const pauseResumeButton = document.querySelector('.control-buttons button');
-pauseResumeButton.addEventListener('click', e => {
-    if(isRunning) {
-        clearInterval(timer);
-        pauseResumeButton.textContent = 'pause';
-    } else {
-        pauseResumeButton.textContent = 'resume';
-    }
-    isRunning = ! isRunning;
-})
-restartTimer();
-startTimer();
+document.getElementById('pomodoro-button').addEventListener('click', function() {
+    enteredTime = 25;
+    restartTimer();
+});
+
+document.getElementById('shortBreak-button').addEventListener('click', function() {
+    enteredTime = 5;
+    restartTimer();
+});
+
+document.getElementById('longBreak-button').addEventListener('click', function() {
+    enteredTime = 15;
+    restartTimer();
+});

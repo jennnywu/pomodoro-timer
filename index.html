@@ -17,28 +17,28 @@
         Pomodoro Timer
     </h1> -->
     <div class="main">
+        <div class="control-buttons">
+            <button id="pomodoro-button">
+                pomodoro
+            </button>
+            <button id="shortBreak-button">
+                short break
+            </button>
+            <button id="longBreak-button">
+                long break
+            </button>
+        </div>
         <div class="timer" id="timer">
             25:00
         </div>
         <div class="control-buttons">
-            <button onclick="startTimer()">
+            <button id="start-button">
                 start
             </button>
-            <!-- <button onclick="restartTimer()">
-                restart
-            </button> -->
-            <img src="restart.png" onclick="restartTimer()" alt="restart" style="width: 50px; height: 50px">
-            <button onclick="chooseTime()">
+            <img src="restart.png" alt="restart" style="width: 50px; height: 50px" id="restart-button">
+            <!-- <button onclick="chooseTimeButtonHandler()" id="chooseTime-button"> -->
+            <button id="chooseTime-button">
                 choose time
-            </button>
-            <button onclick="pomodoro()">
-                pomodoro
-            </button>
-            <button onclick="shortBreak()">
-                short break
-            </button>
-            <button onclick="longBreak()">
-                long break
             </button>
         </div>
         <script src="script.js"></script>
