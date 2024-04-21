@@ -29,7 +29,6 @@ shortBreakButton.addEventListener('click', () => selectedTimer('shortBreak-butto
 longBreakButton.addEventListener('click', () => selectedTimer('longBreak-button'));
 
 if(statusState == buttonState.START) {
-    // startButton.classList.add('selected');
     pomodoroButton.classList.add('selected');
 }
 
@@ -140,3 +139,9 @@ document.getElementById('longBreak-button').addEventListener('click', function()
     enteredTime = 15;
     restartTimer();
 });
+
+function changeBackground() {
+    var selectElement = document.getElementById("background-select");
+    var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+    document.body.style.backgroundImage = "url('" + selectedValue + "')";
+}
