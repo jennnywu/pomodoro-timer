@@ -13,7 +13,7 @@ body {
     font-weight: bold;
     line-height: 1.5;
     min-height: 100vh;
-    background-image: url('img/sunset.jpg');
+    background-image: url('img/mountains.jpg');
     background-size: cover;
     flex-direction: column;
     margin: 0;
