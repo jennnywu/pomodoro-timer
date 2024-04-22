@@ -64,6 +64,8 @@ function updateTimer() {
     if(minutes == 0 && seconds == 0) {
         clearInterval(timer);
         alert('Time is up! Take a break :)');
+        const alarm = document.getElementById('alarmSound');
+        alarm.play();
     }
 }
 

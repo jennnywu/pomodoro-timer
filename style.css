@@ -63,7 +63,7 @@ body {
 
 .control-buttons button:hover {
     font-weight: bold;
-    color: var(--main-color);
+    color: black;
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.5s;
@@ -72,7 +72,7 @@ body {
 
 .control-buttons button.selected {
     font-weight: bold;
-    color: var(--main-color);
+    color: black;
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.3s;
@@ -103,9 +103,5 @@ body {
     background-color: #fff;
     font-family: 'Montserrat';
     border: none;
-    transition: background-color 0.3s;
-}
-
-#background-select:hover {
-    background-color: #f1f1f1;
+    margin-left: 20px;
 }
