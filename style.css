@@ -1,7 +1,8 @@
 /* style.css */
 
-:root {
-    --main-color: rgb(169, 58, 64);
+@keyframes spin {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
 }
 
 body {
@@ -66,7 +67,7 @@ body {
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.5s;
-    z-index: 0;
+    cursor: default;
 }
 
 .control-buttons button.selected {
@@ -75,6 +76,18 @@ body {
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.3s;
+}
+
+.restart-button {
+    font-size: 50px;
+}
+
+#restart-button {
+    cursor: pointer;
+}
+
+#restart-button.spin-animation {
+    animation: spin 1s infinite;
 }
 
 .background-selector {

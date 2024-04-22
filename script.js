@@ -23,10 +23,7 @@ const startButton = document.getElementById('start-button');
 const pomodoroButton = document.getElementById('pomodoro-button');
 const shortBreakButton = document.getElementById('shortBreak-button');
 const longBreakButton = document.getElementById('longBreak-button');
-
-pomodoroButton.addEventListener('click', () => selectedTimer('pomodoro-button'));
-shortBreakButton.addEventListener('click', () => selectedTimer('shortBreak-button'));
-longBreakButton.addEventListener('click', () => selectedTimer('longBreak-button'));
+const restartButton = document.getElementById('restart-button');
 
 if(statusState == buttonState.START) {
     pomodoroButton.classList.add('selected');
@@ -104,7 +101,7 @@ startButton.addEventListener('click', function() {
     }
 });
 
-document.getElementById('restart-button').addEventListener("click", restartTimer);
+restartButton.addEventListener("click", restartTimer);
 
 document.getElementById('chooseTime-button').addEventListener("click", function() {
     const newTime = prompt('Enter new time in minutes: ');
@@ -122,22 +119,32 @@ document.getElementById('chooseTime-button').addEventListener("click", function(
     }
 });
 
-document.getElementById('pomodoro-button').addEventListener('click', function() {
+pomodoroButton.addEventListener('click', function() {
     setTimerState(timerState.POMODORO);
+    selectedTimer('pomodoro-button');
     enteredTime = 25;
     restartTimer();
 });
 
-document.getElementById('shortBreak-button').addEventListener('click', function() {
+shortBreakButton.addEventListener('click', function() {
     setTimerState(timerState.SHORTBREAK);
+    selectedTimer('shortBreak-button')
     enteredTime = 5;
     restartTimer();
 });
 
-document.getElementById('longBreak-button').addEventListener('click', function() {
+longBreakButton.addEventListener('click', function() {
     setTimerState(timerState.LONGBREAK);
+    selectedTimer('longBreak-button');
     enteredTime = 15;
     restartTimer();
+});
+
+restartButton.addEventListener('click', function() {
+    restartButton.classList.add('spin-animation');
+        setTimeout(() => {
+            restartButton.classList.remove('spin-animation');
+        }, 1000);
 });
 
 function changeBackground() {
