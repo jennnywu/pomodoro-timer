@@ -49,8 +49,7 @@ function updateTimer() {
     const timerElement = document.getElementById('timer');
     timerElement.textContent = formatTime(minutes, seconds);
 
-    if(statusState == buttonState.PAUSED || statusState == buttonState.START) {
-        console.log('this should not happen');
+    if(statusState !== buttonState.RUNNING) {
         clearInterval(timer);
     } else {
         if(seconds > 0) {
