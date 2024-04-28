@@ -67,7 +67,7 @@ body {
     background-color: white;
     transition: color 0.3s;
     transition: background-color 0.5s;
-    cursor: default;
+    cursor: pointer;
 }
 
 .control-buttons button.selected {
